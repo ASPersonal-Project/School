@@ -8,13 +8,16 @@
 .main{
 	width:60%;
 	margin:auto;
-	height:auto;
+	height:600px;
 	background-color:yellow;
+	padding-top:150px
 }
 .content{
 	width:60%;
 	margin:auto;
 	padding:30px;
+	background-color:black;
+	color:white;
 }
 
 </style>
@@ -37,16 +40,16 @@
 <?php 
 include("db.php");
 
-$get_sno = "select sno from student";
+$get_sNo = "select sNo from student";
 
-$run_sno = mysqli_query($con,$get_sno);
+$query = mysqli_query($con,$get_sNo);
 
 $found = 0;
 
-if(isset($_REQUEST['submit']){
+if(isset($_REQUEST['submit'])){
 	$studentNo = $_REQUEST['sno'];
-while($row_sno = mysqli_fetch_array($run_sno)){
-	if($row_sno['Sno'] == $sno){
+while($row_sNo = mysqli_fetch_array($query)){
+	if($row_sNo['sNo'] == $studentNo){
 		$found = 1;
 		break;
 	}else{
@@ -55,9 +58,10 @@ while($row_sno = mysqli_fetch_array($run_sno)){
 	
 }
 if($found ==1){
-	header(location:view.php?var=$studentNo);
+	header("location:view.php?var=".$studentNo);
 }else{
-	header(location:add.php?var=$studentNo);
+	header("location:add.php?var=".$studentNo);
+}
 }
 
 
